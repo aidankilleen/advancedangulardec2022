@@ -24,6 +24,25 @@ import { Component } from '@angular/core';
       <accordion-panel title="Panel 3">
         <img src="assets/dog.jpg" width="200">
       </accordion-panel>
+      <accordion-panel title="Panel 4">
+        <ol>
+          <li>Cork</li>
+          <li>Dublin</li>
+          <li>Limerick</li>
+          <li>Galway</li>
+        </ol>
+      </accordion-panel>
+    </accordion>
+
+    <hr>
+
+    <accordion>
+      <accordion-panel title="News Item 1">
+        <h3>This is the News Item 1</h3>
+      </accordion-panel>
+      <accordion-panel title="News Item 2">
+        <h3>This is the News Item 2</h3>
+      </accordion-panel>
     </accordion>
     
 

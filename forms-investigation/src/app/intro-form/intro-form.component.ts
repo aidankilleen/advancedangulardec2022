@@ -17,13 +17,17 @@ import { User } from '../user';
         required
         minlength="4"
         maxlength="20"
-        #name="ngModel">
+        #name="ngModel"
+        [appForbiddenName]="forbiddenNames">
       <div 
         *ngIf="name.invalid && (name.dirty || name.touched)"
         class="alert alert-warning">
         <div *ngIf="name.errors?.['required']">Name is required</div>
         <div *ngIf="name.errors?.['minlength']">
           Name must be {{ name.errors?.['minlength'].requiredLength }} characters long
+        </div>
+        <div *ngIf="name.errors?.['forbiddenName']">
+          Forbidden Name:{{ name.value }} is not allowed
         </div>
       </div>
 
@@ -82,6 +86,10 @@ export class IntroFormComponent implements OnInit {
 
   @Input() user!: User;
   editingUser!: User;
+
+  forbiddenNames = [
+    "Alice", "Aidan", "Adolf"
+  ];
 
   @Output() userChange = new EventEmitter();
 

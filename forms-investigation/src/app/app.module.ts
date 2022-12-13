@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
 import { IntroFormComponent } from './intro-form/intro-form.component';
+import { ForbiddenNameDirective } from './forbidden-name.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NameEditorComponent,
     UserEditorComponent,
-    IntroFormComponent
+    IntroFormComponent,
+    ForbiddenNameDirective
   ],
   imports: [
     BrowserModule,

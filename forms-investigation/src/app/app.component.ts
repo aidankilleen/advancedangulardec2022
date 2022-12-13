@@ -6,14 +6,17 @@ import { User } from './user';
   template: `
     <h1>{{ title | titlecase }}</h1>
 
+    <intro-form [(user)]="user">
+      
+    </intro-form>
+
+    <!--
     <intro-form [user]="user"
       (userChange)="onUserChange($event)"></intro-form>
 
     <hr>
+-->
 
-    <intro-form [(user)]="user">
-      
-    </intro-form>
 
     <hr>
 
@@ -68,7 +71,7 @@ import { User } from './user';
 export class AppComponent {
   title = 'forms investigation';
 
-  user: User = new User(1, "Zoe", "zoe@gmail.com", true);
+  user: User = new User(1, "", "", false);
 
   onUserChange(user: User) {
     this.user = user;

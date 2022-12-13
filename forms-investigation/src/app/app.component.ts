@@ -6,6 +6,21 @@ import { User } from './user';
   template: `
     <h1>{{ title | titlecase }}</h1>
 
+    <intro-form [user]="user"
+      (userChange)="onUserChange($event)"></intro-form>
+
+    <hr>
+
+    <intro-form [(user)]="user">
+      
+    </intro-form>
+
+    <hr>
+
+
+    {{ user | json }}
+
+    <!--
     Name: <input [value]="name" (keyup)="onChange(txtName.value)" #txtName>
   	<button (click)="name = ''">Reset</button>
     <hr>
@@ -37,18 +52,28 @@ import { User } from './user';
 
     <hr>
 
-    <user-editor [(user)]="user">
-
+    <user-editor [user]="user"
+      (userChange)="onUserChange($event)">
     </user-editor>
-    {{ user | json }}
 
+    <user-editor [(user)]="user">
+    </user-editor>
+
+
+    {{ user | json }}
+-->
   `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'forms investigation';
 
-  user: User = new User(1, "Alice", "alice@gmail.com", true);
+  user: User = new User(1, "Zoe", "zoe@gmail.com", true);
+
+  onUserChange(user: User) {
+    this.user = user;
+  }
+
 
   onNameChange(name: string) {
     //alert(`name changed: ${name}`);

@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
+import { IntroFormComponent } from './intro-form/intro-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NameEditorComponent,
-    UserEditorComponent
+    UserEditorComponent,
+    IntroFormComponent
   ],
   imports: [
     BrowserModule,

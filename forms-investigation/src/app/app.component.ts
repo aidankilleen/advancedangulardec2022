@@ -6,10 +6,15 @@ import { User } from './user';
   template: `
     <h1>{{ title | titlecase }}</h1>
 
+
+    <intro-reactive-form [user]="user">
+    </intro-reactive-form>
+
+    <!--
     <intro-form [(user)]="user">
       
     </intro-form>
-
+-->
     <!--
     <intro-form [user]="user"
       (userChange)="onUserChange($event)"></intro-form>
@@ -17,12 +22,12 @@ import { User } from './user';
     <hr>
 -->
 
-
+<!--
     <hr>
 
 
     {{ user | json }}
-
+-->
     <!--
     Name: <input [value]="name" (keyup)="onChange(txtName.value)" #txtName>
   	<button (click)="name = ''">Reset</button>
@@ -71,7 +76,8 @@ import { User } from './user';
 export class AppComponent {
   title = 'forms investigation';
 
-  user: User = new User(1, "", "", false);
+  user: User = new User(1, "Aidan", "aidan@gmail.com", false, 12,
+                        ['JavaScript', 'TypeScript', 'C#']);
 
   onUserChange(user: User) {
     this.user = user;

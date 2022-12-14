@@ -4,6 +4,7 @@ export class User {
                 public name: string = "",
                 public email: string = "", 
                 public active: boolean = false, 
-                public yearsExperience: number = 1) {
+                public yearsExperience: number = 1, 
+                public languages: string[] = []) {
     }
 }

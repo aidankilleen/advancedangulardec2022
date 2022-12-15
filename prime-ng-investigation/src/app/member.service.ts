@@ -73,4 +73,14 @@ export class MemberService {
                                           }
                                         });
   }
+  updateMember(userToUpdate: Member): Observable<Member> {
+
+    return this.httpClient.put<Member>(`${this.url}/${userToUpdate.id}`, 
+                                       userToUpdate, 
+                                       {
+                                        headers:{
+                                          'Content-Type': 'application/json'
+                                        }
+                                      });
+  }
 }

@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Alice",
       "email": "alice@gmail.com",
-      "active": false
+      "active": true
     },
     {
       "id": 2,
@@ -26,9 +26,9 @@
     },
     {
       "id": -1,
-      "name": "NEW MEMBER",
-      "email": "new.member@gmail.com",
-      "active": false
+      "name": "New Name",
+      "email": "new.email@gmail.com",
+      "active": true
     }
   ]
 }

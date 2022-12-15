@@ -10,14 +10,18 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { MemberTableComponent } from './member-table/member-table.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MemberTableComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { FormsModule } from '@angular/forms';
     ButtonModule, 
     CheckboxModule, 
     ToastModule, 
-    DialogModule
+    DialogModule, 
+    InputTextModule, 
+    ConfirmDialogModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

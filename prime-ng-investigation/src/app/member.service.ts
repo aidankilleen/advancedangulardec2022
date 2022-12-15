@@ -63,10 +63,13 @@ export class MemberService {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
-  addMember(userToAdd: Member): Observable<Member> {
+  addMember(memberToAdd: Member): Observable<Member> {
+
+    // remove the id field so that the web service will assign one.
+    let { id, ...memberWithoutId } = memberToAdd;
 
     return this.httpClient.post<Member>(this.url, 
-                                        userToAdd, 
+                                        memberWithoutId, 
                                         {
                                           headers:{
                                             'Content-Type': 'application/json'
@@ -74,6 +77,8 @@ export class MemberService {
                                         });
   }
   updateMember(userToUpdate: Member): Observable<Member> {
+
+
 
     return this.httpClient.put<Member>(`${this.url}/${userToUpdate.id}`, 
                                        userToUpdate, 

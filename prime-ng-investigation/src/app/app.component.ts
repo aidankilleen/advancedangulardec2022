@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Member } from './member.model';
 import { MemberService } from './member.service';
 
@@ -15,90 +15,24 @@ import { MemberService } from './member.service';
       class="p-button-rounded p-button-success">
     </button>
 
-    <p-table [value]="members" dataKey="id" editMode="row">
+    <member-table [members]="members"></member-table>
 
-      <ng-template pTemplate="header">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Active</th>
-          <th>&nbsp;</th>
-        </tr>
-      </ng-template>
-
-      <ng-template pTemplate="body" let-member let-editing="editing" let-ri="rowIndex">
-
-        <tr [pEditableRow]="member">
-          <td>{{ member.id }}</td>
-          
-          <td>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="member.name" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ member.name }}
-              </ng-template>
-            </p-cellEditor>
-
-
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="member.email" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ member.email }}
-              </ng-template>
-            </p-cellEditor>
-
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="checkbox" [(ngModel)]="member.active">
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ member.active ? "Active" : "Inactive" }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-          <div class="flex align-items-center justify-content-center gap-2">
-              <button *ngIf="!editing" 
-                  pButton pRipple 
-                  type="button" 
-                  pInitEditableRow 
-                  icon="pi pi-pencil" 
-                  (click)="onRowEditInit(member)" 
-                  class="p-button-rounded p-button-text">
-                </button>
-              <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(member)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-              <button *ngIf="editing" 
-                pButton pRipple type="button" 
-                pCancelEditableRow icon="pi pi-times" 
-                (click)="onRowEditCancel(member, ri)" 
-                class="p-button-rounded p-button-text p-button-danger"></button>
-          </div>
-          </td>
-        </tr>
-
-      </ng-template>
-
-
-    </p-table>
     <p-toast></p-toast>
 
-    <p-dialog header="Add User" [(visible)]="displayDialog">
+    <p-dialog header="Add User" [(visible)]="displayDialog" position="top">
       
-      <label>Name</label>
-      <input type="text" [(ngModel)]="editingMember.name"><br>
-      <label>Email</label>
-      <input type="text" [(ngModel)]="editingMember.email"><br>
-      <label>Active</label>
-      <input type="checkbox" [(ngModel)]="editingMember.active"><br>
+      <div class="field">
+        <label>Name</label>
+        <input pInputText type="text" [(ngModel)]="editingMember.name"><br>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input pInputText type="text" [(ngModel)]="editingMember.email"><br>
+      </div>
+      <div class="field-checkbox">
+        <label>Active</label>
+        <p-checkbox type="checkbox" [binary]="true" [(ngModel)]="editingMember.active"></p-checkbox>
+      </div>
 
 
       <ng-template pTemplate="footer">
@@ -119,6 +53,8 @@ import { MemberService } from './member.service';
 
     </p-dialog>
 
+
+
     <!--
     {{ members | json }}
     -->
@@ -134,7 +70,7 @@ import { MemberService } from './member.service';
     
   
   `,
-  providers: [ MessageService ], 
+  providers: [ MessageService, ConfirmationService ], 
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
@@ -146,30 +82,14 @@ export class AppComponent implements OnInit {
 
   editingMember: Member = new Member();
 
-  clonedMembers: {[id:number]: Member;} = {};
 
-  constructor(public memberService: MemberService, public messageService:MessageService) {
+
+  constructor(public memberService: MemberService, 
+              public messageService:MessageService, 
+              public confirmationService: ConfirmationService) {
   }
 
-  onRowEditInit(member: Member) {
-    this.clonedMembers[member.id] = { ...member };
-    
-  }
-  onRowEditSave(member: Member) {
-
-    // write changes to backend
-    this.memberService.updateMember(member)
-      .subscribe(updatedMember=>{
-        this.messageService.add({
-          severity:'success', 
-          summary:'Saved', detail:'Member changes saved'});
-      })
-
-  }
-  onRowEditCancel(member: Member, index: number) {
-    this.members[index] = this.clonedMembers[member.id];
-    delete this.clonedMembers[member.id];
-  }
+  
 
   ngOnInit(): void {
     this.memberService.getMembers()
@@ -192,19 +112,15 @@ export class AppComponent implements OnInit {
     .subscribe(addedMember => {
       this.members.push(addedMember);
       this.displayDialog = false;
+
+      this.messageService.add({
+        severity:'success', 
+        summary:'Added', detail:`New member added: ${ addedMember.id }`});
     });
   }
 
 
-  onDelete(id: number) {
-    this.memberService.deleteMember(id)
-      .subscribe(()=>{
-        // remove this member from the members array
-        let index = this.members.findIndex(member => member.id == id);
-        this.members.splice(index, 1);
-
-      });
-  }
+  
 
   onClick(id: number) {
     this.memberService.getMember(id)

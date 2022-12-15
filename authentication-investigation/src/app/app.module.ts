@@ -12,6 +12,8 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { MemberListPageComponent } from './member-list-page/member-list-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { HttpClientModule } from '@angular/common/http';
     HomePageComponent,
     AboutPageComponent,
     ContactPageComponent,
-    MemberListPageComponent
+    MemberListPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
+    FormsModule, 
     HttpClientModule, 
     MenubarModule 
 

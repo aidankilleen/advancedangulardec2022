@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 import { Member } from './member.model';
 
 @Injectable({
@@ -48,20 +49,26 @@ export class MemberService {
     }
 
   ];
-  constructor(public httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient, 
+              private authService: AuthService) { 
   }
 
   getMembers(): Observable<Member[]> {
 
-    let token = localStorage.getItem("ang_auth");
+    //let token = localStorage.getItem("ang_auth");
 
-    console.log("TOKEN:");
-    console.log(token);    
+    //console.log("TOKEN:");
+    //console.log(token);    
+
+    return this.httpClient.get<Member[]>(this.url);
+
+    /*
     return this.httpClient.get<Member[]>(this.url, {
       headers: {
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${ this.authService.token }`
       }
     });
+    */
   }
 
   getMember(id: number): Observable<Member> {

@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
 import { MemberDashboardPageComponent } from './member-dashboard-page/member-dashboard-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AuthInterceptorProvider } from './auth-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { MemberDashboardPageComponent } from './member-dashboard-page/member-das
     ContactPageComponent,
     MemberListPageComponent,
     LoginPageComponent,
-    MemberDashboardPageComponent
+    MemberDashboardPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { MemberDashboardPageComponent } from './member-dashboard-page/member-das
     MenubarModule 
 
   ],
-  providers: [],
+  providers: [ AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

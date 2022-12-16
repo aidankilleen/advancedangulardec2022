@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { IsAuthenticatedGuard } from './is-authenticated.guard';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MemberListPageComponent } from './member-list-page/member-list-page.component';
 
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent }, 
   { path: 'about', component: AboutPageComponent }, 
   { path: 'contact', component: ContactPageComponent }, 
-  { path: 'members', component: MemberListPageComponent }, 
+  { path: 'members', component: MemberListPageComponent,canActivate:[IsAuthenticatedGuard] }, 
   { path: 'login', component: LoginPageComponent }
 ];
 

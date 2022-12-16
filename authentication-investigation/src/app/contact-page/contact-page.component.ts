@@ -21,8 +21,9 @@ export class ContactPageComponent {
 
     // subscribe will only be notified when the value changes!!!
     //this.authService.isLoggedIn$.subscribe(()=>{})
+    
     this.authService.isLoggedIn$.pipe(
-      tap((isLoggedIn)=> {
+      tap(isLoggedIn => {
         // isLoggedIn will contain the current value 
 
         alert(`IsLoggedIn: ${ isLoggedIn }`);

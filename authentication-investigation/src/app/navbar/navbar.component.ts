@@ -43,6 +43,12 @@ export class NavbarComponent implements OnInit {
         }
       }, 
       {
+        label: 'Dashboard', 
+        command: () => {
+          this.router.navigate(['dashboard']);
+        }
+      },
+      {
         label: 'Login', 
         command: () => {
           this.router.navigate(['login']);

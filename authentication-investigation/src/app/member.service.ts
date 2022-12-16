@@ -8,7 +8,7 @@ import { Member } from './member.model';
 })
 export class MemberService {
 
-  url = "http://localhost:3000/members";
+  url = "http://localhost:8000/members";
 
   members: Member[] = [{
       "id": 1,
@@ -52,10 +52,20 @@ export class MemberService {
   }
 
   getMembers(): Observable<Member[]> {
-    return this.httpClient.get<Member[]>(this.url);
+
+    let token = localStorage.getItem("ang_auth");
+
+    console.log("TOKEN:");
+    console.log(token);    
+    return this.httpClient.get<Member[]>(this.url, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
   }
 
   getMember(id: number): Observable<Member> {
+
     return this.httpClient.get<Member>(`${this.url}/${id}`);
   }
 

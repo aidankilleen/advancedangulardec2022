@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1, 
+            "email": "aidan.killeen@gmail.com",
+            "password": "letmein", 
+            "roles": [
+                "user", 
+                "admin"
+            ]
+
+        },
+        {
+            "id": 2, 
+            "email": "alice@gmail.com",
+            "password": "letmein", 
+            "roles": [
+                "user"
+            ]
+        }
+    ]
+}

@@ -14,6 +14,7 @@ import { MemberListPageComponent } from './member-list-page/member-list-page.com
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
+import { MemberDashboardPageComponent } from './member-dashboard-page/member-dashboard-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     AboutPageComponent,
     ContactPageComponent,
     MemberListPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    MemberDashboardPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -25,11 +26,20 @@ export class LoginPageComponent {
   username:string = "";
   password:string = "";
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, 
+              private router: Router) {
 
   }
   onSubmit() {
-    this.authService.login(this.username, this.password);
+    this.authService.login(this.username, this.password)
+      .subscribe(response => {
+        console.log("logged in");
+        console.log(response);
+
+        // redirect to the dashboard
+        this.router.navigate(['dashboard']);
+
+      });
   }
   onLogout() {
     this.authService.logout();

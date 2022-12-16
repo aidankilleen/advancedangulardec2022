@@ -5,6 +5,7 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { IsAuthenticatedGuard } from './is-authenticated.guard';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { MemberDashboardPageComponent } from './member-dashboard-page/member-dashboard-page.component';
 import { MemberListPageComponent } from './member-list-page/member-list-page.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'about', component: AboutPageComponent }, 
   { path: 'contact', component: ContactPageComponent }, 
   { path: 'members', component: MemberListPageComponent,canActivate:[IsAuthenticatedGuard] }, 
+  { path: 'dashboard', component: MemberDashboardPageComponent, canActivate:[IsAuthenticatedGuard]},
   { path: 'login', component: LoginPageComponent }
 ];
 
